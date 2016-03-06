@@ -3,10 +3,10 @@
 ## The function add cached getters and setters in matrix
 
 makeCacheMatrix <- function(x = matrix()) {
-    m <- matrix()
+    m <- NULL
     set <- function(y = matrix()) {
         x <<- y
-        m <<- matrix()
+        m <<- NULL
     }
     get <- function() x
     setSolved <- function(solvedMatrix) m <<- solvedMatrix
@@ -20,14 +20,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## The function solves matrix or gets result from cache if exists 
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    ## Return a matrix that is the inverse of 'x'
     m <- x$getSolved()
-    if(!is.na(m[1,1])){
+    if(!is.null(m)){
         message("getting cached data")
         return(m)
     }
     data <- x$get()
-    m <- solve(data)
+    m <- solve(data, ...)
     x$setSolved(m)
     m
 }
